@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% include '../carousel.html' %}
+    <section class="category-list">
+        <h3 class="text-center py-2 mt-2">Categories</h3>
+        <div class="row justify-content-center py-4 my-4">
+            {% for category in object_list %}
+                <a class="category d-flex align-items-center justify-content-center mx-3" href="list/{{category.pk}}">
+                    <div class="container-flex d-flex align-items-center justify-content-center py-2">
+                        <div class="category-title mt-2">
+                            <p class="text-center py-2">{{category.name}}</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </section><!-- end category-list -->
+    <section class="about-us">
+       <div class="about-us-bg container-flex p-0 mt-4">
+           <div class="about-us-cover container-flex py-2">
+                <div class="container">
+                    <div class="row justify-content-center py-0">
+                        <div class="about-image d-flex justify-content-center" id="about-image-1">
+                            <img src="{% static 'images/about_us_bg.jpg' %}">
+                        </div><!-- end about-image -->
+                        <div class="about-text">
+                            <h2 class="py-2">About Us</h2>
+                            <p class="py-2">
+                                We are a team of passionate individuals dedicated to providing
+                                personalized products and services to our customers.<br>Our mission is
+                                to make sure that every product we create is unique and tailored to
+                                the individual needs and preferences of our clients. Whether you're
+                                looking for custom clothing, personalized accessories, or one-of-akind gifts, we are here to help bring your ideas to life. 
+                            </p>
+                        </div><!-- end about-text -->
+                    </div><!-- end row -->
+                    <div class="row justify-content-center py-0">
+                        <div class="about-text mt-4">
+                            <h2 class="py-2">Quality</h2>
+                            <p class="py-2">
+                                We take pride in our attention to detail,
+                                quality craftsmanship, and exceptional
+                                customer service. We are committed to
+                                exceeding your expectations and
+                                ensuring that every product we deliver
+                                is a reflection of your personal style and
+                                vision.
+                            </p>
+                        </div><!-- end about-image -->
+                        <div class="about-image d-flex col-lg-6 py-0" id="about-image-2">
+                            <img src="{% static 'images/about_us_2.jpg' %}">
+                        </div><!-- end about-text -->
+                    </div><!-- end row -->
+                </div><!-- end container -->
+           </div><!-- end about-us-cover -->
+       </div><!-- end about-us-bg -->
+    </section><!-- end about-us -->
+    <section class="services">
+        <div class="container-flex py-2">
+            <h2 class="text-center py-2">Services</h2>
+            <div class="box-container container justify-content-center align-items-center py-4">
+                <div class="service-box d-flex justify-content-center mx-3 p-3">
+                    <div class="service-image container d-flex justify-content-center py-2">
+                        <i class="fa fa-wrench"></i>
+                    </div>
+                    <div class="service-text py-2">
+                        <h3 class="text-center py-2">Customizability</h3>
+                        <p class="text-center py-2">
+                            Your imagination of your 
+                            product comes to reality 
+                            with us.
+                        </p>
+                    </div>
+                </div>
+                <div class="service-box d-flex justify-content-center mx-3 p-3">
+                    <div class="service-image container d-flex justify-content-center py-2">
+                        <i class="fa fa-spinner"></i>
+                    </div>
+                    <div class="service-text py-2">
+                        <h3 class="text-center py-2">Varieties</h3>
+                        <p class="text-center py-2">
+                            Different styles and 
+                            varieties for different 
+                            products.                            
+                        </p>
+                    </div>
+                </div>
+                <div class="service-box d-flex justify-content-center mx-3 p-3">
+                    <div class="service-image container d-flex justify-content-center py-2">
+                        <i class="fa fa-thumbs-up"></i>
+                    </div>
+                    <div class="service-text py-2">
+                        <h3 class="text-center py-2">Satisfaction</h3>
+                        <p class="text-center py-2">
+                            We ensure that the 
+                            services we provide are up 
+                            to satisfaction.             
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="product-det">
+  <div class="main-cont">
+      <div class="left-detail">
+        <div class="overlay-image-div"> 
+          <a class="add-to-cart" href="/products/add/{{product.pk}}"><p class="text-capitalize add_cart">add to cart</p>
+          <i class="ri-shopping-cart-fill cart-icon"></i></a>
+        </div>
+      </div>
+      <div class="right-detail">
+        <div>
+          <p class="item-heading">{{product.title}}</p>
+          <hr>
+        </div>
+      <div><p class="detail-items">{{product.caategory}}</p></div>
+      <div class="description-div"><p class="detail-items description">{{product.description}}</p></div>
+      <div><p class="detail-items detail-price"><span class="price">Price:</span> {{product.price}}</p></div>
+      <a class="add-to-cart" href="/products/add/{{product.pk}}" >
+        <div class="my-cart">
+        <div class="cart-belt">
+          <div class="horizontal-belt">
+          </div>
+        </div>
+      </div>  
+      </a>
+      </div>
+    </div>
+
+</section> 
+{% endblock content %}
+
+      {% comment %} <section class="product">
+        <div class="row justify-content-center py-4 mt-4">
+          <div class="container d-flex justify-content-center">
+            <div class="product-image col-lg-5">
+              <img src="{{product.image.url}}">
+            </div>
+            <div class="product-detail col-lg-5">
+              <div class="col-lg-12">
+                <h5 class="py-1">{{product.title}}</h5>
+              </div>
+              <div class="col-lg-12">
+                <p class="py-1">{{product.category}}</p>
+              </div>
+              <div class="col-lg-12">
+                <p class="py-1">{{product.description}}</p>
+              </div>
+              <div class="col-lg-12 d-flex align-items-center">
+                <p class="mx-1 py-1">Price:</p>
+                <p class="mx-1">{{product.price}}</p>
+              </div>
+              <div class="col-lg-12">
+                <p class="mx-1 py-1">Custom</p>
+                <div class="col-lg-12 d-flex align-items-center m-0 p-1">
+                  {% if product.custom %}
+                    <input type="checkbox" name="custom" readonly checked="true">
+                  {% else %}
+                    <input type="checkbox" name="custom" readonly checked="true">
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-lg-12 mt-3">
+                <button class="btn">
+                  <a href="/products/add/{{product.pk}}">Add To Cart</a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>  {% endcomment %}

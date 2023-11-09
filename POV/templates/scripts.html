@@ -1,0 +1,285 @@
+<!-- scripts -->
+<script>
+    window.addEventListener('scroll', ()=>{
+            const nav = document.querySelector('.nav-bar')
+            const texts = document.querySelectorAll('.nav-items p')
+            if(window.scrollY > 0){
+                nav.classList.add('OnScrollActive')
+                texts.forEach((item)=>{
+                    console.log(item)
+                    item.style.color = 'black'
+                })
+            }else{
+                nav.classList.remove('OnScrollActive')
+                texts.forEach((item)=>{
+                    console.log(item)
+                    item.style.color = 'white'
+                })
+            }
+
+            
+
+    });
+
+   
+    let prices = []
+    let id_counter = 0
+    const items = document.querySelectorAll('.price-amount');
+   
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("hello loaded DOM")
+        if(items.length>0){
+        items.forEach((price)=>{
+            price.setAttribute('id',id_counter);
+            prices.push(parseFloat(price.textContent));
+            id_counter++;
+        })}
+
+        
+      
+        addToCartSuccess()
+
+
+
+    });
+
+   
+
+
+    let slide_idx = 0;
+    let quantity_idx = 0;
+    let slides = document.getElementsByClassName('slides');
+    let quantity = document.getElementsByClassName('quantity');
+    function toggleElement(id, propertyValue)
+    {
+        let ele = document.getElementById(id); 
+        if(ele.style.display === 'none' || ele.style.display === '')
+        {
+            ele.style.display = propertyValue;
+        }
+        else
+        {
+            ele.style.display = 'none';
+        }
+    }
+
+    function next()
+    {
+        if(slide_idx != slides.length - 1)
+        {
+            slides[slide_idx].style.display = 'none';
+
+            slide_idx++;
+            slides[slide_idx].style.display = 'block'
+        }
+        else
+        {
+            slides[slide_idx].style.display = 'none';
+            slide_idx = 0;
+            slides[slide_idx].style.display = 'block'
+        }
+    } 
+
+    function prev()
+    {
+        if(slide_idx != 0)
+        {
+            slides[slide_idx].style.display = 'none';
+            slide_idx--;
+            slides[slide_idx].style.display = 'block'
+        }
+        else
+        {
+            slides[slide_idx].style.display = 'none';
+            slide_idx = slides.length - 1;
+            slides[slide_idx].style.display = 'block'
+        }
+    }
+
+    function showAuthForms()
+    {
+        let login_form = document.getElementById('login-form');
+        let signup_form = document.getElementById('signup-form');
+        if(login_form.style.display === 'none' || login_form.style.display === '')
+        {
+            login_form.style.display = 'flex';
+            signup_form.style.display = 'none';
+        }
+        else
+        {
+            signup_form.style.display = 'flex';
+            login_form.style.display = 'none';
+        }
+    }
+
+    function calculateUpdateTotal(...quantity){
+        
+        let total = 0
+        let all_item_price  = document.querySelectorAll('.price-amount')
+        for(let i=0; i<all_item_price.length; i++){
+            total += parseFloat(all_item_price[i].textContent);
+        }
+
+        let totalElem = document.querySelectorAll('.totalam')
+        if(total!=0){
+            for(let i=0; i<totalElem.length; i++){
+                totalElem[i].textContent = Math.round(total*100)/100;
+            }
+        }
+        if(quantity.length > 0 && quantity[0] === 0){
+            quantity[1].textContent = "0.0";
+            console.log("hello")
+            let total = 0.0;
+            for(let i=0; i<all_item_price.length; i++){
+                total += parseFloat(all_item_price[i].textContent);
+            }
+            for(let i=0; i<totalElem.length; i++){
+                totalElem[i].textContent = Math.round(total*100)/100;
+                
+            }
+    
+        }
+
+    }
+
+    function addToCartSuccess(){
+
+        let link  = document.querySelectorAll('.add-to-cart')
+        if(link.length > 0){
+        let i=0;
+        while(i<2){
+        link[i].addEventListener('click', ()=>{
+            console.log("hello")
+            let parent  = document.querySelector('.product-det')
+            let successElem = document.createElement('div')
+            successElem.classList.add('alert');
+            successElem.classList.add('alert-success');
+            successElem.textContent = "Added!";
+            successElem.style.width = "50%"
+            parent.insertBefore(successElem, parent.firstChild)
+            console.log(successElem)
+            i++;
+        })
+        }
+    }
+    }
+
+    function updateCounter()
+    {
+        let incre = document.getElementsByClassName('incre');
+        let decre = document.getElementsByClassName('decre');
+
+
+        for(let i=0; i<incre.length; i++)
+        {
+            incre[i].addEventListener
+            (
+                'click',
+                (event) =>
+                {
+                    let targettedParent = event.target.parentElement.parentElement;
+                    let targettedPrice  = targettedParent.lastElementChild;
+                    //let item_amount = targettedPrice.textContent;
+                    let qty = quantity[i].value++;
+                    let calculated = eval(prices[targettedPrice.id]*quantity[i].value)
+                    const roundedNumber = Math.round(calculated * 100) / 100;
+                    if(calculated>0){
+                      
+                        targettedPrice.textContent = roundedNumber;
+                        calculateUpdateTotal();
+                        getCheckoutUrl();
+
+                    }
+                    else{
+                      
+                        targettedPrice.textContent=prices[targettedPrice.id];
+                    }
+                    
+                }
+            )
+        }
+        for(let i=0; i<decre.length; i++)
+        {
+            decre[i].addEventListener
+            (
+                'click',
+                (event) =>
+                {
+                    if(quantity[i].value != 0)
+                    {
+                        let targettedParent = event.target.parentElement.parentElement;
+                        let targettedPrice  = targettedParent.lastElementChild;
+                        quantity[i].value--;
+                        if(quantity[i].value!=0){
+                            let calculated = eval(eval(prices[targettedPrice.id]*quantity[i].value))
+                            const roundedNumber = Math.round(calculated * 100) / 100;
+
+                            if(calculated>0){
+                            targettedPrice.textContent = roundedNumber;
+                            calculateUpdateTotal();
+                            }
+
+                            else{
+                                targettedPrice.textContent=prices[targettedPrice.id];
+                                calculateUpdateTotal();
+                            }
+                        }else{
+                            console.log(quantity[i].value)
+                            console.log("else if zero")
+                            calculateUpdateTotal(0,targettedPrice);
+                        }
+
+                    }
+                }
+            )
+        }
+    }
+
+
+    
+    function getCheckoutUrl()
+    {
+        console.log("hello")
+        let form = document.getElementById('checkoutForm');
+        let urlString = `{% url 'cart:order' %}?`;
+        {% comment %} console.log(quantity) {% endcomment %}
+        for(let i=0; i<quantity.length; i++)
+        {
+            urlString += quantity[i].value;
+            if(i < quantity.length - 1)
+            {
+                urlString += ',';
+            }
+        }
+        form.action = urlString;
+        console.log("strring ",urlString);
+
+    }
+
+    function removeCartItem(){
+        document.addEventListener('click', (event)=>{
+
+            targetElement = event.target
+            if(targetElement.className==="ri-close-line"){
+                targetElement.parentElement.parentElement.remove();//DOM removing
+                removeFromCartSuccess()
+            }
+            
+        })
+    }
+    function removeFromCartSuccess(){
+        let parent  = document.querySelector('.order-items')
+        let successElem = document.createElement('div')
+        successElem.classList.add('alert');
+        successElem.classList.add('alert-danger');
+        successElem.textContent = "Removed!";
+        successElem.style.width = "100%"
+        parent.insertBefore(successElem, parent.firstChild)
+        console.log(successElem)        
+    }
+  
+    updateCounter()
+    calculateUpdateTotal()
+    removeCartItem()
+</script>
+

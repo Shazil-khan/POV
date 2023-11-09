@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% comment %} {% include 'carousel.html' %} {% endcomment %}
+{% comment %} {% include 'products/product_list.html' %} {% endcomment %}
+{% include 'carousel.html' %}
+{% include 'collection.html' %}
+{% include 'products_section.html' %}
+
+{% endblock content %}

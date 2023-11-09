@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="ship-section">
+    
+    <div class="main-container-ship">
+        <div class="left-container">
+            <h1 class="text-capitalize">shipping Details</h1>
+        </div>
+        <div class="d-sm-block d-xm-block d-md-none"><h1 class="text-dark text-capitalize ">Shipping details</h1></div>
+        <form class="checkoutForm my-ship-form p-3" method="post" id="checkout_form">
+            {% csrf_token %}
+            <div class="form-items">
+                {{checkout_form.email}}
+            </div>
+            <div class="form-items">
+                {{checkout_form.address}}
+            </div>
+            <div class="form-items">
+                {{checkout_form.specific_details}}
+            </div>
+            <div class="col-lg-6 py-2">
+                <button class="next-button"  type="submit" value="submit">>Next</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% comment %} <section class="checkout" id="checkout">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="container-flex d-flex justify-content-center align-items-center">
+            <div class="close py-1">
+                <i class="fa fa-close" onclick="toggleElement('checkout', 'none')"></i>
+            </div>
+            <form class="p-4" method="post" id="checkout_form">{% csrf_token %}
+                <div class="col-lg-6 py-3">
+                    {{checkout_form.email}}
+                </div>
+                <div class="col-lg-6 py-3">
+                    {{checkout_form.address}}
+                </div>
+                <div class="col-lg-6 py-3">
+                    {{checkout_form.specific_details}}
+                </div>
+                <div class="col-lg-6 py-2">
+                    <button class="btn" type="submit" value="submit" onclick="getCheckoutUrl()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section> {% endcomment %}
+{% endblock content %}
+
